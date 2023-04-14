@@ -10,7 +10,8 @@ keywords = {
         "是" : "if",
         "否" : "else",
         "回" : "return",
-        "通" : "pass"
+        "通" : "pass",
+        "或" : "or"
 
         }
 
@@ -33,6 +34,7 @@ func = {
         "印" : "print",
         "平方根" : "sqrt",
         "附加" : "append",
-        "总和" : "sum"
+        "总和" : "sum",
+        "格式" : "format"
 
         }
