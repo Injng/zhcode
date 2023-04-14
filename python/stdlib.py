@@ -21,11 +21,18 @@ names = {
 
         }
 
+dunder = {
+        "——名——" : "__name__",
+        "——主——" : "__main__"
+
+        }
+
 func = {
         "范围" : "range",
         "整" : "int",
         "印" : "print",
         "平方根" : "sqrt",
-        "附加" : "append"
+        "附加" : "append",
+        "总和" : "sum"
 
         }
