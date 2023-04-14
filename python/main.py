@@ -111,6 +111,3 @@ def translatepy(filename):
                 state = -1 * (index - 1)
             else:
                 pass
-
-
-translatepy("test.txt")
