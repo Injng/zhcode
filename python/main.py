@@ -5,8 +5,8 @@ from os import path
 import sys
 import stdlib
 
-# list of new functions created by the program
-newfunc = []
+# dictionary of new functions created by the program
+newfunc = {}
 
 # determine if string is in any part of a dictionary key and if so return the index of the key, otherwise return -1
 def inkey(x, keys):
@@ -45,10 +45,12 @@ def translatepy(filename):
         length = len(x)
         name_keys = list(stdlib.names.keys())
         func_keys = list(stdlib.func.keys())
+        newfunc_keys = list(stdlib.newfunc.keys())
         for i in range(length):
             if state == 0:
                 innames = inkey(x[i], name_keys)
                 infunc = inkey(x[i], func_keys)
+                innewfunc = inkey(x[i], newfunc_keys)
                 # Check for names
                 if innames != -1:
                     nameskey = name_keys[innames]
@@ -63,6 +65,13 @@ def translatepy(filename):
                     if matchindex != 0:
                         py.write(stdlib.func.get(funckey))
                         state = -1 * (matchindex - 1)
+                # Check for program-created functions
+                elif innewfunc != -1:
+                    newfunckey = newfunc_keys[innewfunc]
+                    matchindex = matchkey(x, i, newfunckey)
+                    if matchindex != 0:
+                        py.write(stdlib.func.get(newfunckey))
+                        state = -1 * (mathindex - 1)
                 # Check for keywords
                 elif x[i] in stdlib.keywords:
                     py.write(stdlib.keywords.get(x[i]) + " ")
@@ -112,7 +121,7 @@ def translatepy(filename):
                     else:
                         index += 1
                         funcname += x[j]
-                newfunc.append(funcname)
+                newfunc[funcname] = funcname
                 py.write(funcname)
                 state = -1 * (index - 1)
             else:
