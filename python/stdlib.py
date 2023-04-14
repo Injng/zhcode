@@ -11,7 +11,8 @@ keywords = {
         "否" : "else",
         "回" : "return",
         "通" : "pass",
-        "或" : "or"
+        "或" : "or",
+        "当" : "while"
 
         }
 
