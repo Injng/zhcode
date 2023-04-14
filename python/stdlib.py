@@ -12,7 +12,9 @@ keywords = {
         "回" : "return",
         "通" : "pass",
         "或" : "or",
-        "当" : "while"
+        "当" : "while",
+        "真" : "True",
+        "假" : "False"
 
         }
 
