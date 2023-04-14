@@ -74,6 +74,7 @@ def translatepy(filename):
                     for j in range(i + 1, length):
                         index += 1
                         if x[j] == "」":
+                            py.write(" ")
                             break
                         else:
                             py.write(x[j])
@@ -111,3 +112,4 @@ def translatepy(filename):
                 state = -1 * (index - 1)
             else:
                 pass
+
