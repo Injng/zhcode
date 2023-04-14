@@ -12,12 +12,21 @@ keywords = {
         "否" : "else",
         "回" : "return",
         "通" : "pass",
-        "出" : "break",
+        "断" : "break",
         "或" : "or",
+        "与" : "and",
         "当" : "while",
         "真" : "True",
         "假" : "False",
-        "提" : "raise"
+        "提" : "raise",
+        "试" : "try",
+        "以" : "with",
+        "配" : "match",
+        "说" : "assert",
+        "续" : "continue",
+        "全" : "global",
+
+
 
         }
 

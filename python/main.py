@@ -229,4 +229,4 @@ def translatepy(filename):
             else:
                 pass
 
-# translatepy("test.txt")
+translatepy("test.txt")
