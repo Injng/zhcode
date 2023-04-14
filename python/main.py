@@ -69,11 +69,11 @@ def translatepy(filename):
                     if stdlib.keywords.get(x[i]) == "def":
                         state = 2
                 # Check for variable delimiter
-                elif x[i] == "【":
+                elif x[i] == "「":
                     index = 0
                     for j in range(i + 1, length):
                         index += 1
-                        if x[j] == "】":
+                        if x[j] == "」":
                             break
                         else:
                             py.write(x[j])
