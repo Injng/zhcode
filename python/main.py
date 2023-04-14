@@ -34,6 +34,11 @@ def matchkey(x, i, key):
                 return 0
         return length
 
+# General print of filename and line for error handling
+def errprint(name, line, x):
+    print(f"File {name}, line {line}")
+    print(f"    {x}")
+
 # translatepy: Given the path of a txt file containing zhPython code, translate it to Python code and write to new file
 def translatepy(filename):
     file = path.splitext(filename)[0]  # Get file name without extension
@@ -41,16 +46,22 @@ def translatepy(filename):
     py = open(f"{file}.py", "a+")
     lines = zh.readlines()  # Read the file line by line into a list
     state = 0  # Use a state variable to preserve continuity
+    linenum = 0 # Count line numbers
     for x in lines:  # Iterate over the list to translate
+        linenum += 1
         length = len(x)
+        # Get list of keys for translation dictionaries
         name_keys = list(stdlib.names.keys())
         func_keys = list(stdlib.func.keys())
         newfunc_keys = list(newfunc.keys())
+        dunder_keys = list(stdlib.dunder.keys())
         for i in range(length):
             if state == 0:
+                # Check if character is within any of the keys of translation dictionaries
                 innames = inkey(x[i], name_keys)
                 infunc = inkey(x[i], func_keys)
                 innewfunc = inkey(x[i], newfunc_keys)
+                indunder = inkey(x[i], dunder_keys)
                 # Check for strings
                 if x[i] == '"':
                     try:
@@ -82,6 +93,22 @@ def translatepy(filename):
                     except:
                         py.write("'")
                         state = 3
+                # Check for dunder methods
+                elif x[i] == "—":
+                    if indunder != -1:
+                        dunderkey = dunder_keys[indunder]
+                        matchindex = matchkey(x, i, dunderkey)
+                        if matchindex != 0:
+                            py.write(stdlib.dunder.get(dunderkey))
+                            state = -1 * (matchindex - 1)
+                        else:
+                            errprint(filename, linenum, x)
+                            print("TranslateError: dunder method not found")
+                            sys.exit()
+                    else:
+                        errprint(filename, linenum, x)
+                        print("TranslateError: dunder method not found")
+                        sys.exit()
                 # Check for names
                 elif innames != -1:
                     nameskey = name_keys[innames]
