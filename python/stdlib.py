@@ -8,13 +8,16 @@ keywords = {
         "为" : "for",
         "在" : "in",
         "是" : "if",
+        "还" : "elif",
         "否" : "else",
         "回" : "return",
         "通" : "pass",
+        "出" : "break",
         "或" : "or",
         "当" : "while",
         "真" : "True",
-        "假" : "False"
+        "假" : "False",
+        "提" : "raise"
 
         }
 
