@@ -45,14 +45,45 @@ def translatepy(filename):
         length = len(x)
         name_keys = list(stdlib.names.keys())
         func_keys = list(stdlib.func.keys())
-        newfunc_keys = list(stdlib.newfunc.keys())
+        newfunc_keys = list(newfunc.keys())
         for i in range(length):
             if state == 0:
                 innames = inkey(x[i], name_keys)
                 infunc = inkey(x[i], func_keys)
                 innewfunc = inkey(x[i], newfunc_keys)
+                # Check for strings
+                if x[i] == '"':
+                    try:
+                        if x[i + 1] == "—" and x[i + 2] == "—" and x[i + 4] == "—" and x[i + 5] == "—":  # Check for __main__
+                            if x[i + 3] == "主":
+                                py.write('"__main__"')
+                                state = -6
+                            else:
+                                py.write('"')
+                                state = 3
+                        else:
+                            py.write('"')
+                            state = 3
+                    except:
+                        py.write('"')
+                        state = 3
+                elif x[i] == "'":
+                    try:
+                        if x[i + 1] == "——" and x[i + 3] == "——":  # Check for __main__
+                            if x[i + 2] == "主":
+                                py.write("'__main__'")
+                                state = -4
+                            else:
+                                py.write("'")
+                                state = 3
+                        else:
+                            py.write("'")
+                            state = 3
+                    except:
+                        py.write("'")
+                        state = 3
                 # Check for names
-                if innames != -1:
+                elif innames != -1:
                     nameskey = name_keys[innames]
                     matchindex = matchkey(x, i, nameskey)
                     if matchindex != 0:
@@ -70,7 +101,7 @@ def translatepy(filename):
                     newfunckey = newfunc_keys[innewfunc]
                     matchindex = matchkey(x, i, newfunckey)
                     if matchindex != 0:
-                        py.write(stdlib.func.get(newfunckey))
+                        py.write(newfunc.get(newfunckey))
                         state = -1 * (mathindex - 1)
                 # Check for keywords
                 elif x[i] in stdlib.keywords:
@@ -124,6 +155,13 @@ def translatepy(filename):
                 newfunc[funcname] = funcname
                 py.write(funcname)
                 state = -1 * (index - 1)
+            elif state == 3:  # State used for copying contents of a string
+                if x[i] == '"' or x[i] == "'":
+                    py.write(x[i])
+                    state = 0
+                else:
+                    py.write(x[i])
             else:
                 pass
 
+translatepy("test.txt")
