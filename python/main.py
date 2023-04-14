@@ -93,6 +93,11 @@ def translatepy(filename):
                 # Check for comma
                 elif x[i] == "，":
                     py.write(",")
+                # Check for bracket notation
+                elif x[i] == "【":
+                    py.write("[")
+                elif x[i] == "】":
+                    py.write("]")
                 # Otherwise, must be the same
                 else:
                     py.write(x[i])

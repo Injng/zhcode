@@ -14,7 +14,7 @@ keywords = {
 
         }
 
-# names and functions not to exceed four characters
+# names and functions/methods not to exceed four characters
 names = {
         "数学" : "math",
         "系统" : "sys"
@@ -25,6 +25,7 @@ func = {
         "范围" : "range",
         "整" : "int",
         "印" : "print",
-        "平方根" : "sqrt"
+        "平方根" : "sqrt",
+        "附加" : "append"
 
         }
