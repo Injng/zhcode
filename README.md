@@ -1,6 +1,8 @@
 # zhcode
 `zhcode` is a Python library designed to facilitate coding in Chinese. It's main purpose is to advance certain programming languages by transforming them into esoteric forms through the Chinese language.
 
+You can install `zhcode` by running `pip3 install zhcode` in your environment.
+
 ## Python
 Currently, basic Python 3 functions are supported. The project is still in the process of translating library keywords, names, and functions into Chinese equivalents. In general, the syntax for coding in 
 中文Python is the same as that of normal Python, simply with variables switched. However, several syntactic additions have been made: the dot delimeter `.` in standard Python has been changed to `·`, and 
