@@ -25,6 +25,8 @@ keywords = {
         "说" : "assert",
         "续" : "continue",
         "全" : "global",
+        "类" : "class",
+        "自" : "self"
 
 
 
@@ -39,7 +41,8 @@ names = {
 
 dunder = {
         "——名——" : "__name__",
-        "——主——" : "__main__"
+        "——主——" : "__main__",
+        "——初——" : "__init__"
 
         }
 
