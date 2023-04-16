@@ -5,5 +5,5 @@ setuptools.setup(
         version="0.0.1",
         author="lnjng",
         description="Programming languages in Chinese.",
-        packages=["python"]
+        packages=["zhcode"]
         )
