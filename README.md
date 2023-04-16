@@ -1,5 +1,5 @@
 # zhcode
-`zhcode` is a Python library designed to facilitate coding in Chinese. It's main purpose is to advance certain programming languages by transforming them into esoteric forms through the Chinese language.
+`zhcode` is a Python library designed to facilitate coding in Chinese. It's main purpose is to create **esoteric forms of programming languages using the Chinese language**.
 
 You can install `zhcode` by running `pip3 install zhcode` in your environment.
 
