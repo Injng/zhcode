@@ -11,7 +11,7 @@ def zhtrans(file, lang, mode='k'):
     if lang == "py":
         python.translate.translatepy(file)
         if mode == 'd':
-            os.remove(file)
+            remove(file)
     else:
         print(f"TranslateError: language not supported: {file}")
         exit()
@@ -21,10 +21,10 @@ def zhexec(file, lang, mode='k'):
     if lang == "py":
         python.translate.translatepy(file)
         if mode == 'd':
-            os.remove(file)
+            remove(file)
         filename = path.splitext(file)[0] + '.py'
         try:
-            exec(open(filename).read())
+            return exec(open(filename).read())
         except:
             print(f"TranslateError: no such file or directory: {filename}")
             exit()
@@ -50,5 +50,5 @@ def zhexstr(code, lang, name='test.txt'):
         except:
             print("TranslateError: input string formatted incorrectly")
             exit()
-    zhexec(name, lang, mode='d')
+    return zhexec(name, lang, mode='d')
 

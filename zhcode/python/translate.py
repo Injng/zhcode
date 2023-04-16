@@ -4,7 +4,7 @@
 from helper import *
 from os import path
 import sys
-import stdlib
+from python import stdlib
 
 # dictionary of new functions created by the program
 newfunc = {}
@@ -34,6 +34,19 @@ def translatepy(filename):
                 infunc = inkey(x[i], func_keys)
                 innewfunc = inkey(x[i], newfunc_keys)
                 indunder = inkey(x[i], dunder_keys)
+                # For each, if in dictionary, check for compelete match
+                matchnames = 0
+                matchfunc = 0
+                matchnewfunc = 0
+                matchdunder = 0
+                if innames != -1:
+                    matchnames = matchkey(x, i, name_keys[innames])
+                if infunc != -1:
+                    matchfunc = matchkey(x, i, func_keys[infunc])
+                if innewfunc != -1:
+                    matchnewfunc = matchkey(x, i, newfunc_keys[innewfunc])
+                if indunder != -1:
+                    matchdunder = matchkey(x, i, dunder_keys[indunder])
                 # Check for strings
                 if x[i] == '"':
                     if sstate == 1:  # State to ignore strings
@@ -80,51 +93,33 @@ def translatepy(filename):
                             py.write("'")
                             state = 4
                 # Check for dunder methods
-                elif x[i] == "—":
-                    if indunder != -1:
-                        dunderkey = dunder_keys[indunder]
-                        matchindex = matchkey(x, i, dunderkey)
-                        if matchindex != 0:
-                            py.write(stdlib.dunder.get(dunderkey))
-                            state = -1 * (matchindex - 1)
-                        else:
-                            errprint(filename, linenum, x)
-                            print("TranslateError: dunder method not found")
-                            sys.exit()
-                    else:
-                        errprint(filename, linenum, x)
-                        print("TranslateError: dunder method not found")
-                        sys.exit()
+                elif matchdunder != 0:
+                    dunderkey = dunder_keys[indunder]
+                    py.write(stdlib.dunder.get(dunderkey))
+                    state = -1 * (matchdunder - 1)
                 # Check for names
-                elif innames != -1:
+                elif matchnames != 0:
                     nameskey = name_keys[innames]
-                    matchindex = matchkey(x, i, nameskey)
-                    if matchindex != 0:
-                        py.write(stdlib.names.get(nameskey))
-                        state = -1 * (matchindex - 1)
+                    py.write(stdlib.names.get(nameskey))
+                    state = -1 * (matchnames - 1)
                 # Check for functions
-                elif infunc != -1:
+                elif matchfunc != 0:
                     funckey = func_keys[infunc]
-                    matchindex = matchkey(x, i, funckey)
-                    if matchindex != 0:
-                        if stdlib.func.get(funckey) == "format":  # Check for string format exception
-                            if state == 1:
-                                pass
-                            elif x[i + 2] == '"' or x[i + 2] == "'":
-                                py.write("f")
-                                sstate = 1
-                            else:
-                                pass
+                    if stdlib.func.get(funckey) == "format":  # Check for string format exception
+                        if x[i + 2] == '"' or x[i + 2] == "'":
+                            py.write("f")
+                            sstate = 1  # Use string state to ignore string
+                            state = -1  # Use negative state to ignore next iteration
                         else:
-                            py.write(stdlib.func.get(funckey))
-                            state = -1 * (matchindex - 1)
+                            pass
+                    else:
+                        py.write(stdlib.func.get(funckey))
+                        state = -1 * (matchfunc - 1)
                 # Check for program-created functions
-                elif innewfunc != -1:
+                elif matchnewfunc != 0:
                     newfunckey = newfunc_keys[innewfunc]
-                    matchindex = matchkey(x, i, newfunckey)
-                    if matchindex != 0:
-                        py.write(newfunc.get(newfunckey))
-                        state = -1 * (matchindex - 1)
+                    py.write(newfunc.get(newfunckey))
+                    state = -1 * (matchnewfunc - 1)
                 # Check for keywords
                 elif x[i] in stdlib.keywords:
                     py.write(stdlib.keywords.get(x[i]) + " ")
@@ -198,5 +193,3 @@ def translatepy(filename):
                     py.write(x[i])
             else:
                 pass
-
-translatepy("test.txt")
