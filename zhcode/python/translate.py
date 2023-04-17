@@ -18,8 +18,10 @@ def translatepy(filename):
     state = 0  # Use a state variable to preserve continuity
     bstate = 0  # Use a specialized state variable for brackets
     sstate = 0  # Use a specialized state variable for strings
+    cstate = 0  # Use a specialized state variable for comments
     linenum = 0  # Count line numbers
     for x in lines:  # Iterate over the list to translate
+        cstate = 0  # Comment ends at newline
         linenum += 1
         length = len(x)
         # Get list of keys for translation dictionaries
@@ -28,7 +30,9 @@ def translatepy(filename):
         newfunc_keys = list(newfunc.keys())
         dunder_keys = list(stdlib.dunder.keys())
         for i in range(length):
-            if state == 0 or state == 1:
+            if cstate == 1:
+                py.write(x[i])
+            elif state == 0 or state == 1:
                 # Check if character is within any of the keys of translation dictionaries
                 innames = inkey(x[i], name_keys)
                 infunc = inkey(x[i], func_keys)
@@ -137,6 +141,10 @@ def translatepy(filename):
                         else:
                             py.write(x[j])
                     state = -1 * index
+                # Check for comment delimiter
+                elif x[i] == "#":
+                    py.write("#")
+                    cstate = 1
                 # Check for central dot punctuation
                 elif x[i] == "·":
                     py.write(".")
