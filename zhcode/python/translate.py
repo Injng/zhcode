@@ -160,6 +160,9 @@ def translatepy(filename):
                     py.write("<")
                 elif x[i] == "》":
                     py.write(">")
+                # Check for tildes
+                elif x[i] == "～":
+                    py.write('~') 
                 # Check for period punctuation
                 elif x[i] == "。":
                     if bstate == 1:
