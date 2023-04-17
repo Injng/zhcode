@@ -6,7 +6,7 @@ readme = (directory/"README.md").read_text()
 
 setuptools.setup(
         name="zhcode",
-        version="0.0.2",
+        version="0.0.3",
         author="lnjng",
         description="Programming languages in Chinese.",
         license='MIT',
