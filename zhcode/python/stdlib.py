@@ -7,7 +7,7 @@ keywords = {
         "定" : "def",
         "为" : "for",
         "在" : "in",
-        "是" : "if",
+        "如" : "if",
         "还" : "elif",
         "否" : "else",
         "回" : "return",
@@ -15,7 +15,7 @@ keywords = {
         "断" : "break",
         "或" : "or",
         "与" : "and",
-        "当" : "while",
+        "正" : "while",
         "真" : "True",
         "假" : "False",
         "提" : "raise",
@@ -26,10 +26,20 @@ keywords = {
         "续" : "continue",
         "全" : "global",
         "类" : "class",
-        "自" : "self"
-
-
-
+        "自" : "self",
+        "无" : "None",
+        "当" : "as",
+        "异" : "async",
+        "等" : "await",
+        "删" : "del",
+        "除" : "except",
+        "终" : "finally",
+        "从" : "from",
+        "是" : "is",
+        "姆" : "lambda",
+        "外" : "nonlocal",
+        "非" : "not",
+        "产" : "yield
         }
 
 # names and functions/methods not to exceed four characters
