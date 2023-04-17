@@ -57,7 +57,8 @@ def translatepy(filename):
                         sstate = 0
                     else:
                         try:
-                            if x[i + 1] == "—" and x[i + 2] == "—" and x[i + 4] == "—" and x[i + 5] == "—":  # Check for __main__
+                            # Check for __main__
+                            if x[i + 1] == "—" and x[i + 2] == "—" and x[i + 4] == "—" and x[i + 5] == "—": 
                                 if x[i + 3] == "主":
                                     py.write('"__main__"')
                                     state = -6
