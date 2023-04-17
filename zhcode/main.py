@@ -3,13 +3,13 @@
 
 from os import path, remove
 from sys import exit
-import python.translate
+import zhcode.python.translate
 
 
 # Function to translate text file
 def zhtrans(file, lang, mode='k'):
     if lang == "py":
-        python.translate.translatepy(file)
+        zhcode.python.translate.translatepy(file)
         if mode == 'd':
             remove(file)
     else:
@@ -19,7 +19,7 @@ def zhtrans(file, lang, mode='k'):
 # Function to translate and execute file
 def zhexec(file, lang, mode='k'):
     if lang == "py":
-        python.translate.translatepy(file)
+        zhcode.python.translate.translatepy(file)
         if mode == 'd':
             remove(file)
         filename = path.splitext(file)[0] + '.py'

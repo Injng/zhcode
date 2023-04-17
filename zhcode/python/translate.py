@@ -1,10 +1,10 @@
 # translate.py
 # main function for translating from zhPython to Python
 
-from helper import *
+from zhcode.python.helper import *
 from os import path
 import sys
-from python import stdlib
+from zhcode.python import stdlib
 
 # dictionary of new functions created by the program
 newfunc = {}
