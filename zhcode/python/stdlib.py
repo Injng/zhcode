@@ -39,7 +39,7 @@ keywords = {
         "姆" : "lambda",
         "外" : "nonlocal",
         "非" : "not",
-        "产" : "yield
+        "产" : "yield"
         }
 
 # names and functions/methods not to exceed four characters
